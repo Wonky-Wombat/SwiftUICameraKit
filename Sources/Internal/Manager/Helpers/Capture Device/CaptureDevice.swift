@@ -121,7 +121,7 @@ extension CaptureDevice {
 
 // MARK: Set Exposure Mode
 extension CaptureDevice {
-    func setExposureMode(_ mode: AVCaptureDevice.ExposureMode, duration: CMTime, iso: Float, completionHandler: ((CMTime) -> Void)? = nil) {
+    func setExposureMode(_ mode: AVCaptureDevice.ExposureMode, duration: CMTime, iso: Float, completionHandler: DeviceCompletionHandler? = nil) {
         guard isExposureModeSupported(mode) else { return }
 
         exposureMode = mode

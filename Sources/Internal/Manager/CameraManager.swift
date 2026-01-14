@@ -296,7 +296,7 @@ extension CameraManager {
 
 // MARK: Set Exposure Mode
 extension CameraManager {
-    func setExposureMode(_ exposureMode: AVCaptureDevice.ExposureMode, completionHandler: ((CMTime) -> Void)? = nil) throws {
+    func setExposureMode(_ exposureMode: AVCaptureDevice.ExposureMode, completionHandler: DeviceCompletionHandler? = nil) throws {
         guard let device = getCameraInput()?.device, exposureMode != attributes.cameraExposure.mode, !isChanging else { return }
 
         try setDeviceExposureMode(exposureMode, device, completionHandler: completionHandler)
@@ -304,7 +304,7 @@ extension CameraManager {
     }
 }
 private extension CameraManager {
-    func setDeviceExposureMode(_ exposureMode: AVCaptureDevice.ExposureMode, _ device: any CaptureDevice, completionHandler: ((CMTime) -> Void)? = nil) throws {
+    func setDeviceExposureMode(_ exposureMode: AVCaptureDevice.ExposureMode, _ device: any CaptureDevice, completionHandler: DeviceCompletionHandler? = nil) throws {
         try device.lockForConfiguration()
         device.setExposureMode(exposureMode, duration: attributes.cameraExposure.duration, iso: attributes.cameraExposure.iso, completionHandler: completionHandler)
         device.unlockForConfiguration()
@@ -313,7 +313,7 @@ private extension CameraManager {
 
 // MARK: Set Exposure Duration
 extension CameraManager {
-    func setExposureDuration(_ exposureDuration: CMTime, completionHandler: ((CMTime) -> Void)? = nil) throws {
+    func setExposureDuration(_ exposureDuration: CMTime, completionHandler: DeviceCompletionHandler? = nil) throws {
         guard let device = getCameraInput()?.device, exposureDuration != attributes.cameraExposure.duration, !isChanging else { return }
 
         try setDeviceExposureDuration(exposureDuration, device, completionHandler: completionHandler)
@@ -321,7 +321,7 @@ extension CameraManager {
     }
 }
 private extension CameraManager {
-    func setDeviceExposureDuration(_ exposureDuration: CMTime, _ device: any CaptureDevice, completionHandler: ((CMTime) -> Void)? = nil) throws {
+    func setDeviceExposureDuration(_ exposureDuration: CMTime, _ device: any CaptureDevice, completionHandler: DeviceCompletionHandler? = nil) throws {
         try device.lockForConfiguration()
         device.setExposureMode(.custom, duration: exposureDuration, iso: attributes.cameraExposure.iso, completionHandler: completionHandler)
         device.unlockForConfiguration()
@@ -338,7 +338,7 @@ extension CameraManager {
     }
 }
 private extension CameraManager {
-    func setDeviceISO(_ iso: Float, _ device: any CaptureDevice, completionHandler: ((CMTime) -> Void)? = nil) throws {
+    func setDeviceISO(_ iso: Float, _ device: any CaptureDevice, completionHandler: DeviceCompletionHandler? = nil) throws {
         try device.lockForConfiguration()
         device.setExposureMode(.custom, duration: attributes.cameraExposure.duration, iso: iso, completionHandler: completionHandler)
         device.unlockForConfiguration()

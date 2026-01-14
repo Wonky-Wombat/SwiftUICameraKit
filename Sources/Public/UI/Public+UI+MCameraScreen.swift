@@ -157,7 +157,7 @@ public extension MCameraScreen {
 
      - note: If the exposure duration is out of bounds, it will be set to the closest available value.
      */
-    func setExposureDuration(_ exposureDuration: CMTime, completionHandler: ((CMTime) -> Void)? = nil) throws { try cameraManager.setExposureDuration(exposureDuration, completionHandler: completionHandler) }
+    func setExposureDuration(_ exposureDuration: CMTime, completionHandler: DeviceCompletionHandler? = nil) throws { try cameraManager.setExposureDuration(exposureDuration, completionHandler: completionHandler) }
 
     /**
      Set the camera exposure target bias.
@@ -178,7 +178,7 @@ public extension MCameraScreen {
 
      - note: If the exposure mode is not supported, the exposure mode will not be changed.
      */
-    func setExposureMode(_ exposureMode: AVCaptureDevice.ExposureMode, completionHandler: ((CMTime) -> Void)? = nil) throws { try cameraManager.setExposureMode(exposureMode, completionHandler: completionHandler) }
+    func setExposureMode(_ exposureMode: AVCaptureDevice.ExposureMode, completionHandler: DeviceCompletionHandler? = nil) throws { try cameraManager.setExposureMode(exposureMode, completionHandler: completionHandler) }
 
     /**
      Set the camera HDR mode.
