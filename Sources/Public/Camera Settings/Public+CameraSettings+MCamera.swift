@@ -66,9 +66,10 @@ public extension MCamera {
                 .startSession()
         }
      }
-     ```
+    ```
      */
     func setCameraScreen(_ builder: @escaping CameraScreenBuilder) -> Self { config.cameraScreen = builder; return self }
+    func setCameraScreen(_ builder: @escaping SwiftUICameraScreenBuilder) -> Self { config.cameraScreen = builder; return self }
 
     /**
      Changes the captured media screen to a selected one.
@@ -107,6 +108,7 @@ public extension MCamera {
      ```
      */
     func setCapturedMediaScreen(_ builder: CapturedMediaScreenBuilder?) -> Self { config.capturedMediaScreen = builder; return self }
+    func setCapturedMediaScreen(_ builder: SwiftUICapturedMediaScreenBuilder?) -> Self { config.capturedMediaScreen = builder; return self }
 
     /**
      Changes the error screen to a selected one.
@@ -128,6 +130,7 @@ public extension MCamera {
      ```
      */
     func setErrorScreen(_ builder: @escaping ErrorScreenBuilder) -> Self { config.errorScreen = builder; return self }
+    func setErrorScreen(_ builder: @escaping SwiftUICameraErrorScreenBuilder) -> Self { config.errorScreen = builder; return self }
 }
 
 // MARK: Changing Initial Values

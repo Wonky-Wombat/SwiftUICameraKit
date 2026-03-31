@@ -16,6 +16,10 @@ public extension DefaultCameraScreen {
     init(cameraManager: CameraManager, namespace: Namespace.ID, closeMCameraAction: @escaping () -> Void) {
         self.init(cameraManager: cameraManager, namespace: namespace, closeMCameraAction: closeMCameraAction, config: .init())
     }
+
+    init(cameraManager: CameraManager, namespace: Namespace.ID, closeSwiftUICameraAction: @escaping () -> Void) {
+        self.init(cameraManager: cameraManager, namespace: namespace, closeMCameraAction: closeSwiftUICameraAction, config: .init())
+    }
 }
 
 // MARK: Methods

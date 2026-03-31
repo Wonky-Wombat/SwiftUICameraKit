@@ -41,17 +41,22 @@ import SwiftUI
  }
  ```
  */
-public protocol MCameraErrorScreen: View {
+public protocol SwiftUICameraErrorScreen: View {
+    var error: SwiftUICameraError { get }
+    var closeSwiftUICameraAction: () -> () { get }
+}
+
+public protocol MCameraErrorScreen: SwiftUICameraErrorScreen {
     var error: MCameraError { get }
     var closeMCameraAction: () -> () { get }
 }
 
-public typealias SwiftUICameraErrorScreen = MCameraErrorScreen
-
 // MARK: Methods
 public extension MCameraErrorScreen {
     var closeSwiftUICameraAction: () -> () { closeMCameraAction }
+}
 
+public extension SwiftUICameraErrorScreen {
     func openAppSettings() { if let url = URL(string: UIApplication.openSettingsURLString) {
         UIApplication.shared.open(url)
     }}

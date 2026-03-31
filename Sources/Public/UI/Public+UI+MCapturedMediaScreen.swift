@@ -74,11 +74,16 @@ import SwiftUI
  }
  ```
  */
-public protocol MCapturedMediaScreen: View {
-    var capturedMedia: MCameraMedia { get }
+public protocol SwiftUICapturedMediaScreen: View {
+    var capturedMedia: SwiftUICameraMedia { get }
     var namespace: Namespace.ID { get }
     var retakeAction: () -> () { get }
     var acceptMediaAction: () -> () { get }
 }
 
-public typealias SwiftUICapturedMediaScreen = MCapturedMediaScreen
+public protocol MCapturedMediaScreen: SwiftUICapturedMediaScreen {
+    var capturedMedia: MCameraMedia { get }
+    var namespace: Namespace.ID { get }
+    var retakeAction: () -> () { get }
+    var acceptMediaAction: () -> () { get }
+}

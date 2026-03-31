@@ -59,18 +59,24 @@ import MijickTimer
  }
  ```
  */
-public protocol MCameraScreen: View {
+public protocol SwiftUICameraScreen: View {
+    var cameraManager: CameraManager { get }
+    var namespace: Namespace.ID { get }
+    var closeSwiftUICameraAction: () -> () { get }
+}
+
+public protocol MCameraScreen: SwiftUICameraScreen {
     var cameraManager: CameraManager { get }
     var namespace: Namespace.ID { get }
     var closeMCameraAction: () -> () { get }
 }
 
-public typealias SwiftUICameraScreen = MCameraScreen
-
 // MARK: Methods
 public extension MCameraScreen {
     var closeSwiftUICameraAction: () -> () { closeMCameraAction }
+}
 
+public extension SwiftUICameraScreen {
     /**
      View that displays the camera output.
 
@@ -87,12 +93,12 @@ public extension MCameraScreen {
             createCameraOutputView()
             (...)
         }
-     }
+    }
      ```
      */
     func createCameraOutputView() -> some View { CameraBridgeView(cameraManager: cameraManager).equatable() }
 }
-public extension MCameraScreen {
+public extension SwiftUICameraScreen {
     /**
      Capture the current camera output.
 
@@ -210,7 +216,7 @@ public extension MCameraScreen {
 }
 
 // MARK: Attributes
-public extension MCameraScreen {
+public extension SwiftUICameraScreen {
     var cameraOutputType: CameraOutputType { cameraManager.attributes.outputType }
     var cameraPosition: CameraPosition { cameraManager.attributes.cameraPosition }
     var zoomFactor: CGFloat { cameraManager.attributes.zoomFactor }
@@ -246,7 +252,7 @@ public extension MCameraScreen {
     var isAdjustingFocus: Bool { cameraManager.getCameraInput()?.device.isAdjustingFocus ?? false }
     var isAdjustingWhiteBalance: Bool { cameraManager.getCameraInput()?.device.isAdjustingWhiteBalance ?? false }
 }
-public extension MCameraScreen {
+public extension SwiftUICameraScreen {
     var hasFlash: Bool { cameraManager.hasFlash }
     var hasLight: Bool { cameraManager.hasLight }
     var recordingTime: MTime { cameraManager.videoOutput.recordingTime }
