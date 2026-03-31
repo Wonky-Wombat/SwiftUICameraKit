@@ -15,3 +15,5 @@ public enum MCameraError: Error {
     case microphonePermissionsNotGranted, cameraPermissionsNotGranted
     case cannotSetupInput, cannotSetupOutput, cannotSetupMetalDevice
 }
+
+public typealias SwiftUICameraError = MCameraError

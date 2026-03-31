@@ -13,6 +13,8 @@ import Foundation
 
 // MARK: Available Actions
 public extension MCamera.Controller {
+    func closeSwiftUICamera() { closeMCamera() }
+
     /**
      Closes the MCamera.
 

@@ -16,6 +16,10 @@ public typealias CameraScreenBuilder = @MainActor (CameraManager, Namespace.ID, 
 public typealias CapturedMediaScreenBuilder = @MainActor (MCameraMedia, Namespace.ID, _ retakeAction: @escaping () -> (), _ acceptMediaAction: @escaping () -> ()) -> any MCapturedMediaScreen
 public typealias ErrorScreenBuilder = @MainActor (MCameraError, _ closeMCameraAction: @escaping () -> ()) -> any MCameraErrorScreen
 
+public typealias SwiftUICameraScreenBuilder = @MainActor (CameraManager, Namespace.ID, _ closeSwiftUICameraAction: @escaping () -> ()) -> any SwiftUICameraScreen
+public typealias SwiftUICapturedMediaScreenBuilder = @MainActor (SwiftUICameraMedia, Namespace.ID, _ retakeAction: @escaping () -> (), _ acceptMediaAction: @escaping () -> ()) -> any SwiftUICapturedMediaScreen
+public typealias SwiftUICameraErrorScreenBuilder = @MainActor (SwiftUICameraError, _ closeSwiftUICameraAction: @escaping () -> ()) -> any SwiftUICameraErrorScreen
+
 public typealias DeviceCompletionHandler = @Sendable (CMTime) -> Void
 
 public typealias CaptureOutputCallback = (AVCapturePhotoSettings, AVCapturePhotoOutput) -> Void

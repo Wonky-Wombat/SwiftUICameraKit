@@ -367,6 +367,8 @@ public extension MCamera {
 
 // MARK: Others
 public extension MCamera {
+    func setCloseSwiftUICameraAction(_ action: @escaping () -> ()) -> Self { setCloseMCameraAction(action) }
+
     /**
      Locks the screen in portrait mode when the Camera Screen is active.
 

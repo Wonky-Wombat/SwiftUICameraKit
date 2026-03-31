@@ -65,8 +65,12 @@ public protocol MCameraScreen: View {
     var closeMCameraAction: () -> () { get }
 }
 
+public typealias SwiftUICameraScreen = MCameraScreen
+
 // MARK: Methods
 public extension MCameraScreen {
+    var closeSwiftUICameraAction: () -> () { closeMCameraAction }
+
     /**
      View that displays the camera output.
 

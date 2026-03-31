@@ -108,6 +108,9 @@ public struct MCamera: View {
             .onChange(of: manager.attributes.capturedMedia, perform: onCapturedMediaChange)
     }}
 }
+
+public typealias SwiftUICamera = MCamera
+
 private extension MCamera {
     @ViewBuilder func createContent() -> some View {
         if let error = manager.attributes.error { createErrorScreen(error) }

@@ -80,3 +80,5 @@ public protocol MCapturedMediaScreen: View {
     var retakeAction: () -> () { get }
     var acceptMediaAction: () -> () { get }
 }
+
+public typealias SwiftUICapturedMediaScreen = MCapturedMediaScreen

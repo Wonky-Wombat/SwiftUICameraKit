@@ -46,8 +46,12 @@ public protocol MCameraErrorScreen: View {
     var closeMCameraAction: () -> () { get }
 }
 
+public typealias SwiftUICameraErrorScreen = MCameraErrorScreen
+
 // MARK: Methods
 public extension MCameraErrorScreen {
+    var closeSwiftUICameraAction: () -> () { closeMCameraAction }
+
     func openAppSettings() { if let url = URL(string: UIApplication.openSettingsURLString) {
         UIApplication.shared.open(url)
     }}

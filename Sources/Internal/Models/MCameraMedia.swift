@@ -26,3 +26,5 @@ public struct MCameraMedia: Sendable {
 extension MCameraMedia: Equatable {
     public static func == (lhs: MCameraMedia, rhs: MCameraMedia) -> Bool { lhs.image == rhs.image && lhs.video == rhs.video }
 }
+
+public typealias SwiftUICameraMedia = MCameraMedia
