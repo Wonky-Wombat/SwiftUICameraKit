@@ -56,6 +56,30 @@ import AVKit
 extension CameraManager {
     func initialize(in view: UIView) {
         cameraView = view
+        rebindPreviewViewsIfNeeded()
+    }
+}
+
+private extension CameraManager {
+    func rebindPreviewViewsIfNeeded() {
+        guard let cameraView else {
+            return
+        }
+
+        if cameraLayer.superlayer !== cameraView.layer {
+            cameraLayer.removeFromSuperlayer()
+            cameraView.layer.addSublayer(cameraLayer)
+        }
+
+        if cameraMetalView.parent === self, cameraMetalView.superview !== cameraView {
+            cameraMetalView.addToParent(cameraView)
+        }
+
+        if cameraGridView.parent === self, cameraGridView.superview !== cameraView {
+            cameraGridView.setup(parent: self)
+        } else if cameraGridView.parent === self {
+            cameraGridView.setVisibility(attributes.isGridVisible)
+        }
     }
 }
 
@@ -282,7 +306,13 @@ extension CameraManager {
 extension CameraManager {
     func setGridVisibility(_ isGridVisible: Bool) {
         guard isGridVisible != attributes.isGridVisible, !isChanging else { return }
-        cameraGridView.setVisibility(isGridVisible)
+        attributes.isGridVisible = isGridVisible
+        if let activeGrid = cameraView?.viewWithTag(.gridViewTag) as? CameraGridView {
+            activeGrid.setVisibility(isGridVisible)
+        } else if cameraGridView.parent === self, cameraGridView.superview != nil {
+            cameraGridView.setVisibility(isGridVisible)
+        }
+        objectWillChange.send()
     }
 }
 

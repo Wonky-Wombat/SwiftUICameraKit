@@ -22,7 +22,11 @@ extension CameraBridgeView {
         setupPinchGesture(context)
         return inputView
     }
-    func updateUIView(_ uiView: UIViewType, context: Context) {}
+    func updateUIView(_ uiView: UIViewType, context: Context) {
+        if cameraManager.cameraView !== uiView {
+            cameraManager.initialize(in: uiView)
+        }
+    }
     func makeCoordinator() -> Coordinator { .init(self) }
 }
 private extension CameraBridgeView {
@@ -38,7 +42,9 @@ private extension CameraBridgeView {
 
 // MARK: Equatable
 extension CameraBridgeView: Equatable {
-    nonisolated static func ==(lhs: Self, rhs: Self) -> Bool { true }
+    nonisolated static func ==(a: Self, b: Self) -> Bool {
+        ObjectIdentifier(a.cameraManager) == ObjectIdentifier(b.cameraManager)
+    }
 }
 
 

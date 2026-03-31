@@ -19,7 +19,22 @@ class CameraGridView: UIView {
 extension CameraGridView {
     func setup(parent: CameraManager) {
         self.parent = parent
+        self.tag = .gridViewTag
+
+        // Ensure there's only one grid overlay attached to the current camera view.
+        parent.cameraView.subviews
+            .compactMap {
+                $0 as? CameraGridView
+            }
+            .filter {
+                $0 !== self
+            }
+            .forEach {
+                $0.removeFromSuperview()
+            }
+
         self.alpha = parent.attributes.isGridVisible ? 1 : 0
+        self.isHidden = !parent.attributes.isGridVisible
         self.addToParent(parent.cameraView)
     }
 }
@@ -27,8 +42,15 @@ extension CameraGridView {
 // MARK: Set Visibility
 extension CameraGridView {
     func setVisibility(_ isVisible: Bool) {
-        UIView.animate(withDuration: 0.2) { self.alpha = isVisible ? 1 : 0 }
-        parent?.attributes.isGridVisible = isVisible
+        layer.removeAllAnimations()
+        if isVisible {
+            self.isHidden = false
+            UIView.animate(withDuration: 0.2) { self.alpha = 1 }
+        } else {
+            UIView.animate(withDuration: 0.2, animations: { self.alpha = 0 }) { _ in
+                self.isHidden = true
+            }
+        }
     }
 }
 
