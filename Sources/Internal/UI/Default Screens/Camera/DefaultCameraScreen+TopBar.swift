@@ -85,10 +85,22 @@ private extension DefaultCameraScreen.TopBar {
 }
 
 private extension DefaultCameraScreen.TopBar {
-    var topPadding: CGFloat { switch parent.deviceOrientation {
+    var topPadding: CGFloat {
+        let topInset = UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap{ $0.windows }
+            .first(where: { $0.isKeyWindow })?
+            .safeAreaInsets.top ?? 0
+        
+        return topInset > 0 ? topInset + 10 : defaultTopPadding
+    }
+    
+    var defaultTopPadding: CGFloat {
+        switch parent.deviceOrientation {
         case .portrait, .portraitUpsideDown: return 40
         default: return 20
-    }}
+        }
+    }
 }
 private extension DefaultCameraScreen.TopBar {
     var gridButtonIcon: ImageResource { switch parent.isGridVisible {
