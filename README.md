@@ -83,16 +83,16 @@ struct ContentView: View {
             SwiftUICamera()
                 .onImageCaptured { image, controller in
                     capturedImage = image
-                    controller.closeMCamera()
+                    controller.closeSwiftUICamera()
                 }
-                .setCloseMCameraAction { isCameraPresented = false }
+                .setCloseSwiftUICameraAction { isCameraPresented = false }
                 .setCameraOutputType(.photo)
                 .setAudioAvailability(false)
-                .setCameraScreen { cameraManager, namespace, closeMCameraAction in
+                .setCameraScreen { cameraManager, namespace, closeSwiftUICameraAction in
                     DefaultCameraScreen(
                         cameraManager: cameraManager,
                         namespace: namespace,
-                        closeMCameraAction: closeMCameraAction
+                        closeSwiftUICameraAction: closeSwiftUICameraAction
                     )
                     .cameraOutputSwitchAllowed(false)
                 }

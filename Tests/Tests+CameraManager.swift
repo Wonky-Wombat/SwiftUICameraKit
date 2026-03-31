@@ -11,7 +11,7 @@
 
 import Testing
 import SwiftUI
-@testable import MijickCamera
+@testable import SwiftUICameraKit
 
 @MainActor @Suite("Camera Manager Tests") struct CameraManagerTests {
     var cameraManager: CameraManager = .init(
